@@ -1,0 +1,28 @@
+# Болезни сердца и холестерин
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+data=pd.read_csv("heart.csv")
+
+x = np.array(data["chol"]).reshape((-1, 1))
+y = np.array(data["target"])
+
+model = LinearRegression().fit(x, y)
+r_sq = model.score(x, y)
+print('coefficient of determination:', r_sq)
+#Вывод: между холестерином и болезнями сердца существует слабая положительная корреляция.
+#Коэффициент детерминации приблизительно равен 0.007. Это означает, что 0,7% дисперсии болезней сердца объясняется регрессионной моделью, включающей холестерин в качестве независимой переменной.
+
+# Предсказание болезней сердца
+import numpy as np
+import pandas as pd
+
+data=pd.read_csv("heart.csv")
+
+frame = pd.DataFrame(data, columns=['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal'])
+y = np.array(data["target"])
+
+model = LinearRegression().fit(frame, y)
+r_sq = model.score(frame, y)
+print('coefficient of determination:', r_sq)
+#Вывод: по данным таблицы можно построить регрессионную модель, объясняющую приблизительно 52% дисперсии болезней сердца.
